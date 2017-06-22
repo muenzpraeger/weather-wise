@@ -31,6 +31,7 @@ Prerequisite: Prior to installation, ensure Lightning Experience is enabled [see
 To set up the component:
 1. Get the component from [GitHub](https://github.com/TheWeatherCompany/snapshot/) and deploy it to Salesforce.
 2. Optional: Change the default values of the component properties in Setup > Custom Settings.
+
 | Property   | Description   |
 | --- |---|
 | Units | Default type of units to display; possible values: English, metric |
