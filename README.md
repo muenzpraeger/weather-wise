@@ -31,9 +31,10 @@ Prerequisite: Prior to installation, ensure Lightning Experience is enabled [see
 To set up the component:
 1. Get the component from [GitHub](https://github.com/TheWeatherCompany/snapshot/) and deploy it to Salesforce.
 2. Optional: Change the default values of the component properties in Setup > Custom Settings.
-| Property     | Description |
-| ------------- |:-------------:|
-| Unites     | Default type of units to display; possible values: English, metric |
+
+| Property   | Description   |
+| --- |---|
+| Unites | Default type of units to display; possible values: English, metric |
 | Account Address Field | Address type for which to display weather information when the component is on an account page. By default, the component uses the shipping address for accounts. Possible values: shipping, billing.|
 | Contact Address Field | Address type for which to display weather information when the component is on a contact page. By default, the component uses the mailing address for contacts. Possible values: mailing, other. |
 
