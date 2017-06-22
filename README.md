@@ -52,13 +52,15 @@ After you obtain an API key [see Weather Company Data for Salesforce](https://bu
 
 To enable the component to display real data:
 1. Integrate the component with a map API.
-⋅⋅* In Salesforce, add the URL of your map API to **Setup > CSP Trusted Sites** and **Setup > Remote Site Settings**.
-⋅⋅* Define the associated JS files as local resources in **Setup > Static Resources**. *Tip:* Ensure that you create static resources for all JS files. Salesforce doesn't allow you to access JS files on the web.
-⋅⋅* In the src/aura/WxWise/WxWise.cmp file, add a statement to load the JS files. For example:<ltng:require scripts="{!join(',', $Resource.<js1_name>, $Resource..<js2_name>, ..., $Resource..<jsn_name>,afterScriptsLoaded="{!c.afterScriptsLoaded}" />
-⋅⋅* In the WxWiseHelper.js file, add code to initialize and display the map and calls to send the location information to your map API. The component determines the latitude and longitude for the customer's address and sets these values as attributes of the weatherLocation object. The following code gets the values you can send to your map API:
-⋅⋅⋅ component.get('v.weatherLocation.latitude')
-⋅⋅⋅ component.get('v.weatherLocation.longitude'
-⋅⋅ If you want to provide custom zoom controls for the map, implement the mapZoom function. For more information about integrating with your map API, see the comments in the WxWise.cmp, WxWiseController.js, and WxWiseHelper.js files. Tip: To improve performance, configure Salesforce to automatically add geocodes to all account, contact, and lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address.      
+- In Salesforce, add the URL of your map API to **Setup > CSP Trusted Sites** and **Setup > Remote Site Settings**.
+- Define the associated JS files as local resources in **Setup > Static Resources**. *Tip:* Ensure that you create static resources for all JS files. Salesforce doesn't allow you to access JS files on the web.
+- In the src/aura/WxWise/WxWise.cmp file, add a statement to load the JS files. For example: 
+  > <ltng:require scripts="{!join(',', $Resource.<js1_name>, $Resource..<js2_name>, ..., $Resource..<jsn_name>,afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+- In the WxWiseHelper.js file, add code to initialize and display the map and calls to send the location information to your map API. The component determines the latitude and longitude for the customer's address and sets these values as attributes of the weatherLocation object. The following code gets the values you can send to your map API:
+  - component.get('v.weatherLocation.latitude')
+  - component.get('v.weatherLocation.longitude'
+- If you want to provide custom zoom controls for the map, implement the mapZoom function. For more information about integrating with your map API, see the comments in the WxWise.cmp, WxWiseController.js, and WxWiseHelper.js files. Tip: To improve performance, configure Salesforce to automatically add geocodes to all account, contact, and lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address.   
+
 2. In Salesforce, create a CSP Trusted Site for https://api.weather.com to access The Weather Company APIs [see Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm).       
 3. Enter the API key. In Custom Metadata Types, edit the SUN Weather API record [see Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm). For the API Key field, specify the API key you received when you purchased the data package. For the API User field, don’t specify a value.  
 *Tip: If the API key field is not displayed for the API record, edit its page layout.*
