@@ -34,7 +34,7 @@ To set up the component:
 
 | Property   | Description   |
 | --- |---|
-| Unites | Default type of units to display; possible values: English, metric |
+| Units | Default type of units to display; possible values: English, metric |
 | Account Address Field | Address type for which to display weather information when the component is on an account page. By default, the component uses the shipping address for accounts. Possible values: shipping, billing.|
 | Contact Address Field | Address type for which to display weather information when the component is on a contact page. By default, the component uses the mailing address for contacts. Possible values: mailing, other. |
 
@@ -44,7 +44,7 @@ After you obtain an API key [see Weather Company Data for Salesforce](https://bu
 To enable the component to display real data:
 1. In Salesforce, create a CSP Trusted Site for https://api.weather.com to access the Weather Company APIs [see Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm).
 2. Enter the API key. In Custom Metadata Types, edit the SUN_Weather API record [see Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm). For the API Key field, specify the API key you received when you purchased the data package.  For the API User field, don’t specify a value.  
-  - Tip: If the API Key field is not displayed for the API record, edit its page layout.
+  - Tip: If the API Key field is not displayed for the API record, edit its page layout.c
 3. Disable the sample data response and activate the API calls to Weather.com. In the src/aura/WxSnap/WxSnap.cmp file, change the useMockup attribute to false. Tip: To improve performance, configure Salesforce to automatically add geocodes to all Account, Contact, and Lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address. 
 
   
