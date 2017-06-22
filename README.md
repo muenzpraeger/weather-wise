@@ -1,35 +1,59 @@
-# Salesforce-Snapshot
+# The Weather Wise Unmanaged Component Guide
 
-You can use the [editor on GitHub](https://github.com/TheWeatherCompany/salesforce-weatherwise-page/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This component allows you to visualize the weather affecting your customers and use it as a conversation-starter and/or sales tool. For example, if inclement weather is causing active alerts that might impact travel, you can better plan a time to call your contact at a logistics company who might be distracted by the current storms.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This Lightning component can be added to account and contact pages to provide the following data:
+- Current weather conditions (e.g., cloud cover, temperature, precipitation, wind, etc.)
+- Short-term forecasts
+- Active National Weather Service watches and warnings 
 
-### Markdown
+For a more detailed forecast, links are provided to view a full 10-day forecast on Weather.com.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+You can download the unmanaged component from [GitHub](https://github.com/TheWeatherCompany/weather-wise/). To set it up, add the API key from your paid data package subscription from The Weather Company, integrate with a map API of your choice, and customize per your needs. Alternatively, you can use the code as a sample to understand how the API works and then build your own standalone app.
 
-```markdown
-Syntax highlighted code block
+**Tip:** The component is shipped with mock data so you can try it out before you obtain an API key.
 
-# Header 1
-## Header 2
-### Header 3
+### Obtaining an API Key
+By purchasing a data package and access key from The Weather Company, you can include any of the following data streams into the component:
+- Weather Company Data for Salesforce – Core: Daily forecasts for the next 10 days, hourly forecasts for the next 48 hours, and historical weather conditions for the past 24 hours
+- Weather Company Data for Salesforce – Enhanced: More precise and frequent weather observations, precipitation forecast, 15-minute forecast, and Nowcast
+- Weather Company Data for Salesforce – Severe Weather: Information on conditions including hail, lightning, and storms, and a power disruption index
 
-- Bulleted
-- List
+To purchase a Weather Company data package, visit [Weather Company Data for Salesforce](https://business.weather.com/products/weather-data-packages-salesforce).
 
-1. Numbered
-2. List
+## Installing and Configuring the Component
+### System Requirements
+The component is supported for all Salesforce editions; Lightning Experience must be enabled. The component is not supported in Salesforce Classic. The component is supported on all browsers that are supported for Lightning Experience, see [Supported Browsers for Lightning Experience](https://help.salesforce.com/articleView?id=getstart_browsers_sfx.htm) in the Salesforce documentation.
 
-**Bold** and _Italic_ and `Code` text
+**Setting Up the Component**
+Prerequisite: Prior to installation, ensure Lightning Experience is enabled [see Enable Lightning Experience](https://help.salesforce.com/articleView?id=lex_enable_intro.htm). 
 
-[Link](url) and ![Image](src)
-```
+To set up the component:
+1. Get the component from [GitHub](https://github.com/TheWeatherCompany/snapshot/) and deploy it to Salesforce.
+2. Optional: Change the default values of the component properties in Setup > Custom Settings.
+| Property     | Description |
+| ------------- |:-------------:|
+| Unites     | Default type of units to display; possible values: English, metric |
+| Account Address Field | Address type for which to display weather information when the component is on an account page. By default, the component uses the shipping address for accounts. Possible values: shipping, billing.|
+| Contact Address Field | Address type for which to display weather information when the component is on a contact page. By default, the component uses the mailing address for contacts. Possible values: mailing, other. |
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Enabling the component to display real data
+After you obtain an API key [see Weather Company Data for Salesforce](https://business.weather.com/products/weather-data-packages-salesforce), enable the component to display real weather data.
 
-### Jekyll Themes
+To enable the component to display real data:
+1. In Salesforce, create a CSP Trusted Site for https://api.weather.com to access the Weather Company APIs [see Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm).
+2. Enter the API key. In Custom Metadata Types, edit the SUN_Weather API record [see Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm). For the API Key field, specify the API key you received when you purchased the data package.  For the API User field, don’t specify a value.  
+  - Tip: If the API Key field is not displayed for the API record, edit its page layout.
+3. Disable the sample data response and activate the API calls to Weather.com. In the src/aura/WxSnap/WxSnap.cmp file, change the useMockup attribute to false. Tip: To improve performance, configure Salesforce to automatically add geocodes to all Account, Contact, and Lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address. 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/TheWeatherCompany/salesforce-weatherwise-page/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+  
+### Extending the Component
+You can extend the component by purchasing a data subscription and customizing the code to add more historical snapshot information, such as: 
+- Additional 24 hour historical weather details like hail, snow, and ice (included in the Severe Weather package)
+- Older historical data to create weather snapshots back to 2011. This data includes surface temperature, wind speed, wind direction, relative humidity, atmospheric pressure, and dew point (included in the History on Demand package)
 
-### Support or Contact
+For more details about how to extend the component, see the comments in the code.
+
+### Restrictions
+Snapshot shows data for locations in the U.S. and Canada only. The user interface is available in English only.
+
