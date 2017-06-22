@@ -38,23 +38,42 @@ To set up the component:
 | Account Address Field | Address type for which to display weather information when the component is on an account page. By default, the component uses the shipping address for accounts. Possible values: shipping, billing.|
 | Contact Address Field | Address type for which to display weather information when the component is on a contact page. By default, the component uses the mailing address for contacts. Possible values: mailing, other. |
 
+3. Add the component to the contact and account pages by editing the pages in the Lightning App Builder [see Configure Lightning Experience Record Pages](https://help.salesforce.com/articleView?id=lightning_app_builder_customize_lex_pages.htm). 
+  - In the Lightning Components list, scroll down to the Custom section.
+  - Click WxWise and drag the component to any place on the page. Tip: You can add multiple instances of this component to a page and associate each with a different address type (e.g., one instance of the component is associated with the billing address and another instance is associated with the shipping address).
+  - In the properties pane, configure the component’s properties:
+    - Select the address type for which to display weather information. By default, the component uses the mailing address for contacts and the shipping address for accounts.
+    - Select the default type of units to display. 
+  - Save and activate the updated pages.
+The component is now running with mock data.
+
 ### Enabling the component to display real data
 After you obtain an API key [see Weather Company Data for Salesforce](https://business.weather.com/products/weather-data-packages-salesforce), enable the component to display real weather data.
 
 To enable the component to display real data:
-1. In Salesforce, create a CSP Trusted Site for https://api.weather.com to access the Weather Company APIs [see Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm).
-2. Enter the API key. In Custom Metadata Types, edit the SUN_Weather API record [see Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm). For the API Key field, specify the API key you received when you purchased the data package.  For the API User field, don’t specify a value.  
-  - Tip: If the API Key field is not displayed for the API record, edit its page layout.c
-3. Disable the sample data response and activate the API calls to Weather.com. In the src/aura/WxSnap/WxSnap.cmp file, change the useMockup attribute to false. Tip: To improve performance, configure Salesforce to automatically add geocodes to all Account, Contact, and Lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address. 
-
-  
+1. Integrate the component with a map API.
+  - In Salesforce, add the URL of your map API to **Setup > CSP Trusted Sites** and **Setup > Remote Site Settings**.
+  - Define the associated JS files as local resources in **Setup > Static Resources**. *Tip:* Ensure that you create static resources for all JS files. Salesforce doesn't allow you to access JS files on the web.
+  - In the src/aura/WxWise/WxWise.cmp file, add a statement to load the JS files. For example: 
+<ltng:require scripts="{!join(',', $Resource.<js1_name>, $Resource..<js2_name>, ..., $Resource..<jsn_name>,afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+  - In the WxWiseHelper.js file, add code to initialize and display the map and calls to send the location information to your map API. The component determines the latitude and longitude for the customer's address and sets these values as attributes of the weatherLocation object. The following code gets the values you can send to your map API:
+      - component.get('v.weatherLocation.latitude')
+      - component.get('v.weatherLocation.longitude'
+  - If you want to provide custom zoom controls for the map, implement the mapZoom function. For more information about integrating with your map API, see the comments in the WxWise.cmp, WxWiseController.js, and WxWiseHelper.js files. Tip: To improve performance, configure Salesforce to automatically add geocodes to all account, contact, and lead records [see Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address.      
+2. In Salesforce, create a CSP Trusted Site for https://api.weather.com to access The Weather Company APIs [see Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm).       
+3. Enter the API key. In Custom Metadata Types, edit the SUN Weather API record [see Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm). For the API Key field, specify the API key you received when you purchased the data package. For the API User field, don’t specify a value.  
+*Tip: If the API key field is not displayed for the API record, edit its page layout.*
+4. Disable the sample data response and activate the API calls to Weather.com. In the WxWise.cmp file, change the useMockup attribute to “false.”      
+        
 ### Extending the Component
-You can extend the component by purchasing a data subscription and customizing the code to add more historical snapshot information, such as: 
-- Additional 24 hour historical weather details like hail, snow, and ice (included in the Severe Weather package)
-- Older historical data to create weather snapshots back to 2011. This data includes surface temperature, wind speed, wind direction, relative humidity, atmospheric pressure, and dew point (included in the History on Demand package)
-
+You can extend the component by purchasing a data subscription and customizing the code:
+- Add the component to other Salesforce pages, such as leads or opportunities.
+- Add more detailed weather data to support operational planning and other activities:
+  - 10-day forecast with 2 days hourly (included in Core data package)
+  - 15-day hourly forecast with 7 hours of 15-minute increments (included in Enhanced data package)
+  - More precise location for current conditions (included in Enhanced data package)
+  - Current conditions enhanced with severe weather like hail and ice (included in Severe  Weather data package) 
 For more details about how to extend the component, see the comments in the code.
 
 ### Restrictions
-Snapshot shows data for locations in the U.S. and Canada only. The user interface is available in English only.
-
+The component shows data for locations in the U.S. and Canada only. The user interface is available in English only.
