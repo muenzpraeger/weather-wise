@@ -43,9 +43,8 @@ To set up the component:
 	2. Click WxWise and drag the component to any place on the page. *Tip*: You can add multiple instances of this component to a page and associate each with a different address type (e.g., one instance of the component is associated with the billing address and another instance is associated with the shipping address).
 	3. In the properties pane, configure the component’s properties:
 		- Select the address type for which to display weather information. By default, the component uses the mailing address for contacts and the shipping address for accounts.
-		- Select the default type of units to display. 
-		
- 	4. Save and activate the updated pages.
+		- Select the default type of units to display.	
+	4. Save and activate the updated pages.
 
 The component is now running with mock data.
 
