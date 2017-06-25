@@ -44,7 +44,9 @@ To set up the component:
 	3. In the properties pane, configure the component’s properties:
 		- Select the address type for which to display weather information. By default, the component uses the mailing address for contacts and the shipping address for accounts.
 		- Select the default type of units to display. 
+		
  	4. Save and activate the updated pages.
+
 The component is now running with mock data.
 
 ### Enabling the component to display real data
@@ -67,8 +69,8 @@ To enable the component to display real data:
 	5. If you want to provide custom zoom controls for the map, implement the mapZoom function. For more information about integrating with your map API, see the comments in the WxWise.cmp, WxWiseController.js, and WxWiseHelper.js files. *Tip*: To improve performance, configure Salesforce to automatically add geocodes to all account, contact, and lead records (see [Set Up Geocode Data Integration Rules](https://help.salesforce.com/articleView?id=data_dot_com_clean_add_geocode_information_to_all_records.htm)). The component then uses the geocode values instead of making API calls to determine the latitude and longitude for each address.   
 
 2. In Salesforce, create a CSP Trusted Site for https://<i></i>api.weather.com to access The Weather Company APIs (see [Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm)).       
-3. Enter the API key. In Custom Metadata Types, edit the SUN Weather API record (see [Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm)). For the API Key field, specify the API key you received when you purchased the data package. For the API User field, don’t specify a value.  
-*Tip*: If the API key field is not displayed for the API record, edit its page layout.
+3. Enter the API key. In Custom Metadata Types, edit the SUN Weather API record (see [Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm)). For the API Key field, specify the API key you received when you purchased the data package. For the API User field, don’t specify a value. *Tip*: If the API key field is not displayed for the API record, edit its page layout.
+
 4. Disable the sample data response and activate the API calls to Weather.com. In the WxWise.cmp file, change the useMockup attribute to “false.”      
         
 ### Extending the Component
