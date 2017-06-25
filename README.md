@@ -55,7 +55,9 @@ To enable the component to display real data:
 	1. In Salesforce, add the URL of your map API to **Setup > CSP Trusted Sites** and **Setup > Remote Site Settings**.
 	2. Define the associated JS files as local resources in **Setup > Static Resources**. *Tip:* Ensure that you create static resources for all JS files. Salesforce doesn't allow you to access JS files on the web.
 	3. In the src/aura/WxWise/WxWise.cmp file, add a statement to load the JS files. For example: 
-	> <ltng:require scripts="{!join(',', $Resource.<js1_name>, $Resource..<js2_name>, ..., $Resource..<jsn_name>,afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+	```
+	<ltng:require scripts="{!join(',', $Resource.<js1_name>, $Resource..<js2_name>, ..., $Resource..<jsn_name>,afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+	```
 	4. In the WxWiseHelper.js file, add code to initialize and display the map and calls to send the location information to your map API. The component determines the latitude and longitude for the customer's address and sets these values as attributes of the weatherLocation object. The following code gets the values you can send to your map API:
 		```
 		component.get('v.weatherLocation.latitude')
