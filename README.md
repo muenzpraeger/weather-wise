@@ -69,7 +69,6 @@ To enable the component to display real data:
 
 2. In Salesforce, create a CSP Trusted Site for https://<i></i>api.weather.com to access The Weather Company APIs (see [Create CSP Trusted Sites to Access Third-Party APIs](https://help.salesforce.com/articleView?id=csp_trusted_sites.htm)).       
 3. Enter the API key. In Custom Metadata Types, edit the SUN Weather API record (see [Add or Edit Custom Metadata Records Declaratively](https://help.salesforce.com/articleView?id=custommetadatatypes_ui_populate.htm)). For the API Key field, specify the API key you received when you purchased the data package. For the API User field, don’t specify a value. *Tip*: If the API key field is not displayed for the API record, edit its page layout.
-
 4. Disable the sample data response and activate the API calls to Weather.com. In the WxWise.cmp file, change the useMockup attribute to “false.”      
         
 ### Extending the Component
