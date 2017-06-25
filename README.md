@@ -39,8 +39,8 @@ To set up the component:
 	| Contact Address Field | Address type for which to display weather information when the component is on a contact page. By default, the component uses the mailing address for contacts. Possible values: mailing, other. |
 
 3. Add the component to the contact and account pages by editing the pages in the Lightning App Builder (see [Configure Lightning Experience Record Pages](https://help.salesforce.com/articleView?id=lightning_app_builder_customize_lex_pages.htm)). 
-	1. In the Lightning Components list, scroll down to the Custom section.
-	2. Click WxWise and drag the component to any place on the page. *Tip*: You can add multiple instances of this component to a page and associate each with a different address type (e.g., one instance of the component is associated with the billing address and another instance is associated with the shipping address).
+	1. In the **Lightning Components** list, scroll down to the **Custom** section.
+	2. Click **WxWise** and drag the component to any place on the page. *Tip*: You can add multiple instances of this component to a page and associate each with a different address type (e.g., one instance of the component is associated with the billing address and another instance is associated with the shipping address).
 	3. In the properties pane, configure the component’s properties:
 		- Select the address type for which to display weather information. By default, the component uses the mailing address for contacts and the shipping address for accounts.
 		- Select the default type of units to display.	
